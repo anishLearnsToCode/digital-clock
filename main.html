@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digital Clock</title>
+</head>
+<body>
+
+<div>
+    <h1>Digital Clock</h1>
+    <p><span>Hours:</span> <span id="hours"></span></p>
+    <p><span>Minutes:</span> <span id="minutes"></span></p>
+    <p><span>Seconds:</span> <span id="seconds"></span></p>
+</div>
+
+<script>
+    const hoursTag = document.getElementById('hours');
+    const minutesTag = document.getElementById('minutes');
+    const secondsTag = document.getElementById('seconds');
+
+    currentTime = new Date()
+    minutes = currentTime.getMinutes();
+    hours = currentTime.getHours();
+    seconds = currentTime.getSeconds();
+
+    secondsTag.innerText = seconds;
+    minutesTag.innerText = minutes;
+    hoursTag.innerText = hours;
+
+    setInterval(() => {
+        secondsTag.innerText = (Number(secondsTag.innerText) + 1) % 60;
+        // minutesTag.innerText = Math.floor(Number(minutesTag.innerText) + 1 / 60) % 60;
+        if (Number(secondsTag.innerText) === 0) {
+            minutesTag.innerText = (Number(minutesTag.innerText) + 1) % 60;
+        }
+        if (Number(minutesTag.innerText) === 0 && Number(secondsTag.innerText) === 0) {
+            hoursTag.innerText = (Number(hoursTag.innerText) + 1) % 24;
+        }
+    }, 1000)
+</script>
+
+</body>
+</html>
